@@ -4,7 +4,6 @@
  *  Created on: Aug 25, 2020
  */
 
-#include <stdio.h>
 #include "stm32f1xx_hal.h"
 #include "retarget.h"
 #include "usart.h"
