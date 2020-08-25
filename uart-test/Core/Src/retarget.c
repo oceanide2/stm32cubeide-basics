@@ -4,27 +4,23 @@
  *  Created on: Aug 25, 2020
  */
 
+#include <stdio.h>
 #include "stm32f1xx_hal.h"
 #include "retarget.h"
 #include "usart.h"
 
-int __io_putchar(int ch)
-{
-  uint8_t c[1];
-  c[0] = ch & 0x00FF;
+/*
+ * @brief   Retargets the C library printf function to the USART
+ * @param   None
+ * @retval  None
+ */
 
-  HAL_UART_Transmit(DBG_UART, &*c, 1, 10);
+PUTCHAR_PROTOTYPE
+{
+  if (ch == '\n')
+    HAL_UART_Transmit(DBG_UART, (uint8_t *)"\r", 1, HAL_MAX_DELAY);
+
+  HAL_UART_Transmit(DBG_UART, (uint8_t *)&ch, 1, HAL_MAX_DELAY);
+
   return ch;
-}
-
-int _write(int file, char *ptr, int len)
-{
-  int i;
-
-  for (i = 0; i < len; i++)
-  {
-    __io_putchar(*ptr++);
-  }
-
-  return len;
 }

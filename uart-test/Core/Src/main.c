@@ -101,7 +101,7 @@ int main(void)
     HAL_Delay(1000);
     nloop++;
 
-    printf("nloop = %d\r\n", nloop);
+    printf("nloop = %d\n", nloop);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
